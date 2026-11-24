@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Cloud Service Catalog</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #365b4a;
+    --green-dark: #294638;
+    --light: #edf3eb;
+    --background: #f8f8f3;
+    --white: #ffffff;
+    --text: #29372f;
+    --muted: #727c74;
+    --border: #e4e9e1;
+    --orange: #c47a53;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.55;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: auto;
+}
+
+/* NAVIGATION */
+
+header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+nav {
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+    color: var(--green);
+    letter-spacing: -0.8px;
+}
+
+.brand span {
+    color: var(--orange);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+/* HERO */
+
+.hero {
+    padding: 38px 0;
+    background: #f0f4ed;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1.6fr 0.8fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.eyebrow {
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    color: var(--green-dark);
+    font-size: clamp(34px, 4vw, 49px);
+    font-weight: normal;
+    line-height: 1.13;
+    margin: 12px 0;
+    max-width: 620px;
+}
+
+.hero-description {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 570px;
+    line-height: 1.7;
+}
+
+.student-info {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 5px;
+    padding: 13px 17px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.student-info strong {
+    color: var(--green);
+}
+
+.student-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* COMMON SECTIONS */
+
+section {
+    scroll-margin-top: 75px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.section-label {
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.section-title {
+    color: var(--green);
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+.section-description {
+    color: var(--muted);
+    font-size: 12px;
+    max-width: 570px;
+}
+
+/* SERVICES */
+
+.services-section {
+    padding: 30px 0;
+}
+
+.service-count {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+}
+
+.service-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 19px 16px;
+    position: relative;
+    transition: 0.2s ease;
+}
+
+.service-card:hover {
+    border-color: #94ad98;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(41, 70, 56, 0.06);
+}
+
+.service-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-icon {
+    width: 37px;
+    height: 37px;
+    border-radius: 9px;
+    background: var(--light);
+    color: var(--green);
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+}
+
+.service-number {
+    font-size: 10px;
+    color: #a4aaa4;
+}
+
+.service-card h3 {
+    color: var(--green);
+    font-size: 16px;
+    margin: 13px 0 6px;
+}
+
+.category {
+    display: inline-block;
+    background: var(--light);
+    color: var(--green);
+    padding: 3px 8px;
+    font-size: 10px;
+    border-radius: 3px;
+    margin-bottom: 9px;
+}
+
+.service-card p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+    min-height: 53px;
+}
+
+.pricing {
+    border-top: 1px solid var(--border);
+    padding-top: 9px;
+    margin-top: 11px;
+    color: #596b5e;
+    font-size: 10px;
+}
+
+/* CATEGORY GUIDE */
+
+.guide-section {
+    padding: 5px 0 30px;
+}
+
+.guide-box {
+    background: #eaf0e7;
+    border: 1px solid #e1e9df;
+    border-radius: 7px;
+    padding: 20px 23px;
+}
+
+.guide-heading {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: normal;
+    color: var(--green);
+    margin-bottom: 13px;
+}
+
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.category-item {
+    border-left: 2px solid #8ca58f;
+    padding-left: 12px;
+}
+
+.category-item strong {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.category-item p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* API SECTION */
+
+.api-section {
+    padding: 0 0 32px;
+}
+
+.api-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 16px;
+}
+
+.api-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 17px 19px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.method {
+    color: var(--green);
+    background: var(--light);
+    padding: 4px 9px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.api-card h3 {
+    color: var(--green);
+    font-size: 16px;
+    margin: 9px 0 4px;
+}
+
+.api-card p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.api-button {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.api-button:hover {
+    background: var(--green-dark);
+}
+
+/* FOOTER */
+
+footer {
+    background: #edf1e9;
+    border-top: 1px solid var(--border);
+    padding: 15px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr 0.75fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 92%;
+    }
+
+    nav {
+        min-height: 55px;
+    }
+
+    .nav-links {
+        gap: 10px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 28px 0;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .student-info {
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .services {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+    }
+
+    .service-card {
+        padding: 13px 11px;
+    }
+
+    .service-card h3 {
+        font-size: 14px;
+    }
+
+    .category-list,
+    .api-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-box {
+        padding: 17px;
+    }
+
+    .section-title {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 360px) {
+    .services {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="#" class="brand">cloud<span>.</span>catalogue</a>
+
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#categories">Categories</a>
+                <a href="#api">API Access</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+    <div class="container hero-content">
+
+        <div>
+            <div class="eyebrow">Understanding the digital world</div>
+
+            <h1>
+                The services behind
+                the things we use every day.
+            </h1>
+
+            <p class="hero-description">
+                From storing photographs to running applications,
+                many of the digital experiences we depend on are
+                supported by services working behind the scenes.
+                This catalogue brings some of those services together
+                in one simple place.
+            </p>
+        </div>
+
+        <div class="student-panel">
+            <div class="student-info">
+                <div>
+                    <H3><strong>Developed by</strong><br>
+                    HARINI G
+
+                    <BR>
+                    <BR>
+
+                    <strong>Roll Number</strong><br>
+                    2648026. </H3>
+                </div>
+                <BR>
+
+                <div>
+                         
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="container services-section" id="services">
+
+    <div class="section-heading">
+        <div>
+            <div class="section-label">01 / The collection</div>
+            <h2 class="section-title">Cloud services, in one place.</h2>
+            <p class="section-description">
+                Explore services that help store data, run code
+                and support digital applications.
+            </p>
+        </div>
+
+        <span class="service-count" id="serviceCount">
+            Loading...
+        </span>
+    </div>
+
+    <div class="services" id="servicesGrid">
+
+        <article class="service-card">
+            <div class="service-icon">☁</div>
+            <h3>Loading services...</h3>
+            <p>Retrieving the catalogue.</p>
+        </article>
+
+    </div>
+</section>
+
+<!-- CATEGORY GUIDE -->
+
+<section class="container guide-section" id="categories">
+
+    <div class="guide-box">
+
+        <div class="section-label">02 / A little context</div>
+
+        <h2 class="guide-heading">
+            Understanding the categories
+        </h2>
+
+        <div class="category-list">
+
+            <div class="category-item">
+                <strong>IaaS</strong>
+                <p>
+                    Rent computing resources such as virtual
+                    machines, storage and networks.
+                </p>
+            </div>
+
+            <div class="category-item">
+                <strong>PaaS</strong>
+                <p>
+                    Get a platform to build, deploy and run
+                    applications.
+                </p>
+            </div>
+
+            <div class="category-item">
+                <strong>SaaS</strong>
+                <p>
+                    Use ready-made software through the internet
+                    without managing its infrastructure.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- API ACCESS -->
+
+<section class="container api-section" id="api">
+
+    <div class="section-label">03 / Behind the catalogue</div>
+
+    <h2 class="section-title">Explore the application data.</h2>
+
+    <p class="section-description">
+        The information below is provided by the Express
+        backend through two separate API endpoints.
+    </p>
+
+    <div class="api-grid">
+
+        <article class="api-card">
+
+            <span class="method">GET /api/services</span>
+
+            <h3>Cloud service collection</h3>
+
+            <p>
+                View service names, IDs, categories and
+                pricing models in JSON format.
+            </p>
+
+            <a href="/api/services"
+               target="_blank"
+               class="api-button">
+                View service data →
+            </a>
+
+        </article>
+
+        <article class="api-card">
+
+            <span class="method">GET /api/status</span>
+
+            <h3>Application status</h3>
+
+            <p>
+                Check whether the application is operational
+                and view its developer and environment details.
+            </p>
+
+            <a href="/api/status"
+               target="_blank"
+               class="api-button">
+                Check system status →
+            </a>
+
+        </article>
+
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-content">
+        <span>© 2026 Enterprise Cloud Service Catalog</span>
+        <span>Developed using Node.js and Express.js</span>
+    </div>
+</footer>
+
+<script>
+
+// Simple descriptions for visitors
+
+const descriptions = {
+    "Amazon EC2":
+        "Rent a virtual computer online to run applications and handle computing tasks.",
+
+    "AWS Lambda":
+        "Run code automatically when an event occurs, without managing servers.",
+
+    "Amazon S3":
+        "Store photographs, documents, videos and other digital files online.",
+
+    "Google Cloud Run":
+        "Deploy and run applications without managing the underlying servers."
+};
+
+// Icons for each service
+
+const serviceIcons = {
+    "Amazon EC2": "▣",
+    "AWS Lambda": "ϟ",
+    "Amazon S3": "▤",
+    "Google Cloud Run": "☁"
+};
+
+// Load services from Express backend
+
+async function loadServices() {
+
+    const grid = document.getElementById("servicesGrid");
+    const count = document.getElementById("serviceCount");
+
+    try {
+
+        const response = await fetch("/api/services");
+
+        if (!response.ok) {
+            throw new Error("Unable to load services");
+        }
+
+        const services = await response.json();
+
+        grid.innerHTML = "";
+
+        count.textContent = services.length + " services";
+
+        services.forEach(service => {
+
+            const card = document.createElement("article");
+            card.className = "service-card";
+
+            const top = document.createElement("div");
+            top.className = "service-top";
+
+            const icon = document.createElement("div");
+            icon.className = "service-icon";
+            icon.textContent =
+                serviceIcons[service.serviceName] || "☁";
+
+            const number = document.createElement("span");
+            number.className = "service-number";
+            number.textContent =
+                "#" + String(service.serviceId).padStart(2, "0");
+
+            top.append(icon, number);
+
+            const title = document.createElement("h3");
+            title.textContent = service.serviceName;
+
+            const category = document.createElement("span");
+            category.className = "category";
+            category.textContent = service.category;
+
+            const description = document.createElement("p");
+            description.textContent =
+                descriptions[service.serviceName] ||
+                "A cloud service that supports digital applications and infrastructure.";
+
+            const pricing = document.createElement("div");
+            pricing.className = "pricing";
+            pricing.textContent =
+                "Pricing: " + service.pricingModel;
+
+            card.append(
+                top,
+                title,
+                category,
+                description,
+                pricing
+            );
+
+            grid.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        count.textContent = "Unavailable";
+
+        grid.innerHTML =
+            "<p>Unable to load the catalogue. Please try again later.</p>";
+
+        console.error(error);
+
+    }
+}
+
+// Load catalogue when the page opens
+
+loadServices();
+
+</script>
+
+</body>
+</html>
